@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
                 "*=true\n"
                 "category.*=false\n"
                 "category.a=true\n"
-                "category.b.critical=true\n"
+                "category.b=true\n"
                 );
 
     QLoggingCategory categoryA("category.a");
@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
     qCDebug(categoryA, "Hello Qt 5 World");
 
     QLoggingCategory categoryB("category.b");
-    qCDebug(categoryB) << "Hello World";
+    qCDebug(categoryB) << Q_FUNC_INFO << __LINE__ << "Hello World";
     qCWarning(categoryB) << "Hello" << "Qt" << 5 << "World";
     qCCritical(categoryB) << QRect(0, 0, 100, 100) << QTime::currentTime();
 
