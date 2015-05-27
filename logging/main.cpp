@@ -64,15 +64,17 @@ int main(int argc, char *argv[])
     qCDebug(categoryC).nospace() << "Hello" << world;
     qCDebug(categoryC).noquote() << "Hello" << world;
 
-//    QStringList list = {"Hello", "World"};
-//    {
-//        QDebug dbg = qDebug();
-//        dbg.nospace().noquote();
-//        dbg << "List:";
-//        for (int i = 0; i < list.size(); i++) {
-//            dbg << ' ' << i << '/' << list.at(i);
-//        }
-//    }
+    QStringList list = {"Hello", "World"};
+    // copied from qCDebug macro
+    for (bool qt_category_enabled = categoryC().isDebugEnabled(); qt_category_enabled; qt_category_enabled = false) \
+    {
+        QDebug dbg = QMessageLogger(QT_MESSAGELOG_FILE, QT_MESSAGELOG_LINE, QT_MESSAGELOG_FUNC, categoryC().categoryName()).debug(categoryC);
+        dbg.nospace().noquote();
+        dbg << "List:";
+        for (int i = 0; i < list.size(); i++) {
+            dbg << ' ' << i << '/' << list.at(i);
+        }
+    }
 
     qCDebug(categoryD).nospace() << "RGB: #" << hex << uppercasedigits
                        << 0x7e << 0xc2 << 0x42;
