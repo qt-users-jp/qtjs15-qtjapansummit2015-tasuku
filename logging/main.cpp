@@ -2,6 +2,7 @@
 #include <QtCore/QDebug>
 #include <QtCore/QRect>
 #include <QtCore/QTime>
+#include <QtCore/QLoggingCategory>
 
 struct Color { uchar r, g, b; };
 
@@ -21,12 +22,14 @@ int main(int argc, char *argv[])
 {
     QCoreApplication app(argc, argv);
 
-    qDebug("Hello World");
-    qDebug("Hello Qt 5 World");
+    QLoggingCategory categoryA("category.a");
+    qCDebug(categoryA, "Hello World");
+    qCDebug(categoryA, "Hello Qt 5 World");
 
-    qDebug() << "Hello World";
-    qDebug() << "Hello" << "Qt" << 5 << "World";
-    qDebug() << QRect(0, 0, 100, 100) << QTime::currentTime();
+    QLoggingCategory categoryB("category.b");
+    qCDebug(categoryB) << "Hello World";
+    qCDebug(categoryB) << "Hello" << "Qt" << 5 << "World";
+    qCDebug(categoryB) << QRect(0, 0, 100, 100) << QTime::currentTime();
 
     QString world = QStringLiteral("World");
     qDebug() << "Hello" << world;
