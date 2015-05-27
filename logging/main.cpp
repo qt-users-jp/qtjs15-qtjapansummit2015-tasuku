@@ -43,10 +43,14 @@ int main(int argc, char *argv[])
         }
     }
 
+#ifndef MY_NO_COLOR_DEBUG
     qDebug().nospace() << "RGB: #" << hex << uppercasedigits
                        << 0x7e << 0xc2 << 0x42;
+#endif
 
-    qDebug() << Color({126, 194, 6}) << QTime::currentTime();
+    if (qEnvironmentVariableIsEmpty("MY_NO_COLOR_DEBUG")) {
+        qDebug() << Color({126, 194, 6}) << QTime::currentTime();
+    }
 
 //    return app.exec();
     return 0;
