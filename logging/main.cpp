@@ -29,6 +29,9 @@ int main(int argc, char *argv[])
         }
     }
 
+    qDebug().nospace() << "RGB: #" << hex << uppercasedigits
+                       << 0x7e << 0xc2 << 0x42;
+
 //    return app.exec();
     return 0;
 }
