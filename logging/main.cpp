@@ -3,6 +3,18 @@
 #include <QtCore/QRect>
 #include <QtCore/QTime>
 
+struct Color { uchar r, g, b; };
+
+QDebug operator <<(QDebug dbg, const Color &color) {
+    dbg.nospace();
+    dbg << "Color(#";
+    dbg << hex << uppercasedigits;
+    dbg << qSetFieldWidth(2) << qSetPadChar('0');
+    dbg << color.r << color.g << color.b;
+    dbg << qSetFieldWidth(0) << ')';
+    return dbg;
+}
+
 int main(int argc, char *argv[])
 {
     QCoreApplication app(argc, argv);
@@ -31,6 +43,8 @@ int main(int argc, char *argv[])
 
     qDebug().nospace() << "RGB: #" << hex << uppercasedigits
                        << 0x7e << 0xc2 << 0x42;
+
+    qDebug() << Color({126, 194, 6});
 
 //    return app.exec();
     return 0;
