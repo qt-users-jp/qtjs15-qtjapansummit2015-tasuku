@@ -35,6 +35,9 @@ int main(int argc, char *argv[])
 
     qInstallMessageHandler(
                 [](QtMsgType type, const QMessageLogContext &context, const QString &message) {
+        // スレッドセーフにしてね
+        // 再帰にも対応してね
+        // theread_local or QThreadStorage
         logViewer->append(
                     qFormatLogMessage(type, context, message)
                     );
