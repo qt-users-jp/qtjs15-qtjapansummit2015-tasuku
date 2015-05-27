@@ -1,18 +1,7 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2015-05-27T13:19:50
-#
-#-------------------------------------------------
-
-QT       += core
-
-QT       -= gui
-
-TARGET = logging
-CONFIG   += console
-CONFIG   -= app_bundle
-
 TEMPLATE = app
-
+TARGET = logging
+QT = core
+CONFIG   += console c++11
+CONFIG   -= app_bundle
 
 SOURCES += main.cpp
