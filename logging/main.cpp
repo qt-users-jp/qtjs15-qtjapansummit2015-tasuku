@@ -24,6 +24,13 @@ int main(int argc, char *argv[])
 {
     QCoreApplication app(argc, argv);
 
+    QLoggingCategory::setFilterRules(
+                "*=true\n"
+                "category.*=false\n"
+                "category.a=true\n"
+                "category.b=true\n"
+                );
+
     QLoggingCategory categoryA("category.a");
     qCDebug(categoryA, "Hello World");
     qCDebug(categoryA, "Hello Qt 5 World");
