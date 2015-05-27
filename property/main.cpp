@@ -4,19 +4,20 @@
 class Object : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(int value READ value WRITE setValue NOTIFY valueChanged)
+//    Q_PROPERTY(int value READ value WRITE setValue NOTIFY valueChanged)
+    Q_PROPERTY(int value MEMBER m_value NOTIFY valueChanged)
 public:
     Object(QObject *parent = Q_NULLPTR)
         : QObject(parent), m_value(0) {}
 
-    int value() const { return m_value; }
+//    int value() const { return m_value; }
 
 public slots:
-    void setValue(int value) {
-        if (m_value == value) return;
-        m_value = value;
-        emit valueChanged(value);
-    }
+//    void setValue(int value) {
+//        if (m_value == value) return;
+//        m_value = value;
+//        emit valueChanged(value);
+//    }
 
 signals:
     void valueChanged(int value);
@@ -34,9 +35,9 @@ int main(int argc, char *argv[])
         qDebug() << value;
     });
 
-    qDebug() << object.value();
-    object.setValue(100);
-    qDebug() << object.value();
+//    qDebug() << object.value();
+//    object.setValue(100);
+//    qDebug() << object.value();
 
     QObject *qobject = qobject_cast<QObject *>(&object);
     qDebug() << qobject->property("value").toInt();
