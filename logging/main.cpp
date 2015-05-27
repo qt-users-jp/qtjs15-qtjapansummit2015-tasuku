@@ -14,6 +14,11 @@ int main(int argc, char *argv[])
     qDebug() << "Hello" << "Qt" << 5 << "World";
     qDebug() << QRect(0, 0, 100, 100) << QTime::currentTime();
 
+    QString world = QStringLiteral("World");
+    qDebug() << "Hello" << world;
+    qDebug().nospace() << "Hello" << world;
+    qDebug().noquote() << "Hello" << world;
+
 //    return app.exec();
     return 0;
 }
