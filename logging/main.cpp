@@ -6,6 +6,8 @@
 struct Color { uchar r, g, b; };
 
 QDebug operator <<(QDebug dbg, const Color &color) {
+    QDebugStateSaver saver(dbg);
+    dbg.resetFormat();
     dbg.nospace();
     dbg << "Color(#";
     dbg << hex << uppercasedigits;
@@ -44,7 +46,7 @@ int main(int argc, char *argv[])
     qDebug().nospace() << "RGB: #" << hex << uppercasedigits
                        << 0x7e << 0xc2 << 0x42;
 
-    qDebug() << Color({126, 194, 6});
+    qDebug() << Color({126, 194, 6}) << QTime::currentTime();
 
 //    return app.exec();
     return 0;
