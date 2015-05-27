@@ -4,6 +4,7 @@
 class Object : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(int value READ value WRITE setValue NOTIFY valueChanged)
 public:
     Object(QObject *parent = Q_NULLPTR)
         : QObject(parent), m_value(0) {}
@@ -36,6 +37,12 @@ int main(int argc, char *argv[])
     qDebug() << object.value();
     object.setValue(100);
     qDebug() << object.value();
+
+    QObject *qobject = qobject_cast<QObject *>(&object);
+    qDebug() << qobject->property("value").toInt();
+    qobject->setProperty("value", 200);
+    qDebug() << qobject->property("value").toInt();
+
     return 0;
 }
 
