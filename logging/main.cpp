@@ -35,7 +35,9 @@ int main(int argc, char *argv[])
 
     qInstallMessageHandler(
                 [](QtMsgType type, const QMessageLogContext &context, const QString &message) {
-        logViewer->append(message);
+        logViewer->append(
+                    qFormatLogMessage(type, context, message)
+                    );
     });
 
     QLoggingCategory::setFilterRules(
