@@ -1,8 +1,11 @@
-#include <QtCore/QCoreApplication>
+//#include <QtCore/QCoreApplication>
 #include <QtCore/QDebug>
 #include <QtCore/QRect>
 #include <QtCore/QTime>
 #include <QtCore/QLoggingCategory>
+
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QTextBrowser>
 
 #include "mydebug.h"
 
@@ -20,15 +23,24 @@ QDebug operator <<(QDebug dbg, const Color &color) {
     return dbg;
 }
 
+QTextBrowser *logViewer;
+
 int main(int argc, char *argv[])
 {
-    QCoreApplication app(argc, argv);
+//    QCoreApplication app(argc, argv);
+    QApplication app(argc, argv);
+
+    logViewer = new QTextBrowser;
+    logViewer->show();
+
+    qInstallMessageHandler(
+                [](QtMsgType type, const QMessageLogContext &context, const QString &message) {
+        logViewer->append(message);
+    });
 
     QLoggingCategory::setFilterRules(
-                "*=true\n"
-                "category.*=false\n"
-                "category.a=true\n"
-                "category.b=true\n"
+                "*=false\n"
+                "category.*=true\n"
                 );
     qSetMessagePattern("%{category} %{function}:%{line}: %{message}");
 
@@ -62,6 +74,6 @@ int main(int argc, char *argv[])
 
     qCDebug(categoryD) << Color({126, 194, 6}) << QTime::currentTime();
 
-//    return app.exec();
-    return 0;
+//    return 0;
+    return app.exec();
 }
