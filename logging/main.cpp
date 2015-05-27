@@ -19,6 +19,16 @@ int main(int argc, char *argv[])
     qDebug().nospace() << "Hello" << world;
     qDebug().noquote() << "Hello" << world;
 
+    QStringList list = {"Hello", "World"};
+    {
+        QDebug dbg = qDebug();
+        dbg.nospace().noquote();
+        dbg << "List:";
+        for (int i = 0; i < list.size(); i++) {
+            dbg << ' ' << i << '/' << list.at(i);
+        }
+    }
+
 //    return app.exec();
     return 0;
 }
