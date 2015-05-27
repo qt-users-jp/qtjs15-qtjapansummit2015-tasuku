@@ -30,13 +30,15 @@ int main(int argc, char *argv[])
                 "category.a=true\n"
                 "category.b=true\n"
                 );
+    qSetMessagePattern("%{category} %{function}:%{line}: %{message}");
+
 
     QLoggingCategory categoryA("category.a");
     qCDebug(categoryA, "Hello World");
     qCDebug(categoryA, "Hello Qt 5 World");
 
     QLoggingCategory categoryB("category.b");
-    qCDebug(categoryB) << Q_FUNC_INFO << __LINE__ << "Hello World";
+    qCDebug(categoryB) << "Hello World";
     qCWarning(categoryB) << "Hello" << "Qt" << 5 << "World";
     qCCritical(categoryB) << QRect(0, 0, 100, 100) << QTime::currentTime();
 
